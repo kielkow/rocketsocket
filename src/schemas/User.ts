@@ -1,10 +1,10 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 type UserDocument = Document & {
-    email: string;
-    socket_id: string;
-    name: string;
-    avatar: string;
+    email: String;
+    socket_id: String;
+    name: String;
+    avatar: String;
 }
 
 const UserSchema = new Schema({
