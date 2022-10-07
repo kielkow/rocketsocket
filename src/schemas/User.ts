@@ -1,6 +1,6 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import { Document, Schema, model } from 'mongoose';
 
-type UserDocument = Document & {
+type User = Document & {
     email: String;
     socket_id: String;
     name: String;
@@ -14,6 +14,6 @@ const UserSchema = new Schema({
     avatar: String,
 });
 
-const User = mongoose.model<UserDocument>('Users', UserSchema);
+const User = model<User>('Users', UserSchema);
 
 export { User };

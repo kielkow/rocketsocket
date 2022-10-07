@@ -1,16 +1,16 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import { Document, Schema, model } from 'mongoose';
 
-type MessageDocument = Document & {
+type Message = Document & {
     to: String;
     text: String;
     created_at: Date;
     roomId: String;
-}
+};
 
 const MessageSchema = new Schema({
     to: {
         type: Schema.Types.ObjectId,
-        refId: 'Users'
+        ref: 'Users'
     },
     text: String,
     created_at: {
@@ -19,10 +19,10 @@ const MessageSchema = new Schema({
     },
     roomId: {
         type: String,
-        refId: 'ChatRoom'
+        ref: 'ChatRooms'
     },
 });
 
-const Message = mongoose.model<MessageDocument>('Messages', MessageSchema);
+const Message = model<Message>('Messages', MessageSchema);
 
 export { Message };
