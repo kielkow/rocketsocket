@@ -15,15 +15,21 @@ class CreateUserService {
 
         let user: User;
         if (userAlreadyExists) {
-            user = await User.findOneAndUpdate({
-                _id: userAlreadyExists._id
-            }, {
-                $set: {
-                    socket_id,
-                    avatar,
-                    name,
+            user = await User.findOneAndUpdate(
+                {
+                    _id: userAlreadyExists._id
+                },
+                {
+                    $set: {
+                        socket_id,
+                        avatar,
+                        name,
+                    }
+                },
+                {
+                    new: true,
                 }
-            });
+            );
         } else {
             user = await User.create({
                 email,
