@@ -3,6 +3,7 @@ import { io } from "../http";
 import { CreateChatRoomService } from "../services/CreateChatRoomService";
 import { CreateUserService } from "../services/CreateUserService";
 import { GetAllUsersService } from "../services/GetAllUsersService";
+import { GetChatRoomByUsersService } from "../services/GetChatRoomByUsersService";
 import { GetUserBySocketIdService } from "../services/GetUserBySocketIdService";
 
 io.on('connect', socket => {
@@ -33,13 +34,18 @@ io.on('connect', socket => {
     socket.on('start_chat', async (data, callback) => {
         const createChatRoomService = container.resolve(CreateChatRoomService);
         const getUserBySocketIdService = container.resolve(GetUserBySocketIdService);
+        const getChatRoomByUsersService = container.resolve(GetChatRoomByUsersService);
 
         const userLogged = await getUserBySocketIdService.execute(socket.id);
 
-        const room = await createChatRoomService.execute(
-            [data.idUser, userLogged._id]
-        );
+        const idUsers = [data.idUser, userLogged._id];
 
-        callback({ room });
+        let room = await getChatRoomByUsersService.execute(idUsers);
+
+        if (!room) {
+            room = await createChatRoomService.execute(idUsers);
+        }
+
+        callback ({ room });
     });
 });
