@@ -69,8 +69,8 @@ function addMessage(data) {
       />
       <strong> ${data.user.name} &nbsp; </strong>
       <span>  ${dayjs(data.message.created_at).format(
-        "DD/MM/YYYY HH:mm"
-      )} </span></span
+    "DD/MM/YYYY HH:mm"
+  )} </span></span
     >
     <div class="messages">
       <span class="chat_message"> ${data.message.text}</span>
