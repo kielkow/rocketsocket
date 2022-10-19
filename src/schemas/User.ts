@@ -2,7 +2,7 @@ import { Document, Schema, model } from 'mongoose';
 
 type User = Document & {
     email: String;
-    socket_id: String;
+    socket_id: string;
     name: String;
     avatar: String;
 }
