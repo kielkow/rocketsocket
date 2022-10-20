@@ -77,7 +77,9 @@ io.on('connect', socket => {
 
         const room = await getChatRoomByIdService.execute(data.idChatRoom);
 
-        const userFrom = room.idUsers.find(response => response._id !== user._id);
+        const userFrom = room.idUsers.find(
+            response => String(response._id) !== String(user._id)
+        );
 
         io.to(userFrom.socket_id).emit("notification", {
             newMessage: true,
