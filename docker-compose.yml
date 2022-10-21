@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  database:
+    image: mongo
+    container_name: rocketsocket_database
+    restart: always
+    ports: 
+      - 27017:27017
+    volumes:
+      - mongodata:/data/mongo
+
+  app:
+    build: .
+    container_name: rocketsocket_app
+    restart: always
+    ports: 
+      - 3000:3000
+    volumes: 
+      - .:/usr/app
+    links: 
+      - database
+    depends_on:
+      - database
+
+volumes:
+  mongodata:
+    driver: local
