@@ -20,12 +20,12 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 const io = new Server(server);
 
 io.on('connection', (socket) => {
-    console.log("Socket", socket.id);
+    console.log("Connection made with socket", socket.id);
 });
 
 app.get('/', (request, response) => {
     return response.json({
-        message: 'Hello Websocket App',
+        message: 'Websocket App is Up!',
     });
 });
 
