@@ -10,7 +10,7 @@ const app = express();
 
 const server = createServer(app);
 
-mongoose.connect('mongodb://localhost:27017/rocketsocket', {
+mongoose.connect('mongodb://localhost:27017/rocketsocket_database', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
